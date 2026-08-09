@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>$MEMETARD</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --yellow: #FFD600;
+    --black: #111111;
+    --white: #FFFFFF;
+    --gray: #F5F5F0;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--yellow);
+    color: var(--black);
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ── NAV ── */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem 1.5rem;
+    background: var(--black);
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    gap: 1rem;
+  }
+  .nav-logo {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    color: var(--yellow);
+    letter-spacing: 2px;
+    flex-shrink: 0;
+  }
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--yellow); }
+  .nav-cta {
+    background: var(--yellow);
+    color: var(--black);
+    border: none;
+    padding: 0.55rem 1.1rem;
+    font-weight: 900;
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: transform 0.15s;
+  }
+  .nav-cta:hover { transform: scale(1.05); }
+
+  /* ── TICKER ── */
+  .ticker {
+    background: var(--black);
+    color: var(--yellow);
+    font-family: 'Bangers', cursive;
+    font-size: clamp(0.85rem, 3vw, 1.1rem);
+    letter-spacing: 2px;
+    padding: 0.45rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+    border-top: 2px solid var(--yellow);
+  }
+  .ticker-inner { display: inline-block; animation: ticker 20s linear infinite; }
+  @keyframes ticker {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    min-height: 85vh;
+    padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 4rem);
+    gap: 2rem;
+    background: var(--yellow);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: -40px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.06);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    background: var(--black);
+    color: var(--yellow);
+    font-weight: 900;
+    font-size: clamp(0.65rem, 2vw, 0.75rem);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    line-height: 0.95;
+    color: var(--black);
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+    text-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+  }
+  .hero-sub {
+    font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+    font-weight: 700;
+    color: var(--black);
+    opacity: 0.72;
+    line-height: 1.55;
+    margin-bottom: 2rem;
+    max-width: 420px;
+  }
+  .hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--black);
+    color: var(--yellow);
+    border: 3px solid var(--black);
+    padding: 0.75rem 1.6rem;
+    font-weight: 900;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-primary:hover { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 rgba(0,0,0,0.3); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--black);
+    border: 3px solid var(--black);
+    padding: 0.75rem 1.6rem;
+    font-weight: 900;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-secondary:hover { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 rgba(0,0,0,0.25); }
+
+  .hero-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .mascot-frame {
+    width: clamp(180px, 30vw, 280px);
+    height: clamp(180px, 30vw, 280px);
+    border-radius: 50%;
+    background: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 8px 8px 0 rgba(0,0,0,0.18);
+  }
+  .mascot-inner {
+    font-size: clamp(5rem, 14vw, 9rem);
+    line-height: 1;
+    animation: bob 2.5s ease-in-out infinite;
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-10px); }
+  }
+  .badge-supply {
+    position: absolute;
+    top: -10px; right: -14px;
+    background: var(--white);
+    border: 3px solid var(--black);
+    border-radius: 8px;
+    padding: 0.45rem 0.8rem;
+    font-weight: 900;
+    font-size: 0.72rem;
+    line-height: 1.3;
+    text-align: center;
+    transform: rotate(6deg);
+  }
+  .badge-supply span { display: block; font-size: 1rem; }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--black);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 3px solid var(--yellow);
+  }
+  .stat-item {
+    padding: 1.2rem 1rem;
+    border-right: 1px solid rgba(255,214,0,0.2);
+    text-align: center;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-label {
+    font-size: clamp(0.6rem, 1.5vw, 0.72rem);
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,214,0,0.6);
+    margin-bottom: 0.3rem;
+  }
+  .stat-value {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(1rem, 3vw, 1.8rem);
+    letter-spacing: 1px;
+    color: var(--yellow);
+    word-break: break-all;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 5vw, 4rem); }
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.4);
+    margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(2rem, 7vw, 4rem);
+    letter-spacing: 2px;
+    line-height: 1.05;
+    margin-bottom: 0.75rem;
+  }
+
+  /* ── TOKENOMICS ── */
+  .tokenomics-section {
+    background: var(--white);
+    border-top: 4px solid var(--black);
+    border-bottom: 4px solid var(--black);
+  }
+  .tokenomics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .tok-card {
+    border: 3px solid var(--black);
+    border-radius: 8px;
+    padding: 1.3rem 1rem;
+    text-align: center;
+    box-shadow: 4px 4px 0 var(--black);
+    transition: transform 0.15s;
+  }
+  .tok-card:hover { transform: translate(-2px,-2px); }
+  .tok-card.yellow { background: var(--yellow); }
+  .tok-card.red    { background: #FFD6D8; }
+  .tok-card.blue   { background: #D6E4FF; }
+  .tok-pct {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(2rem, 6vw, 2.8rem);
+    letter-spacing: 1px;
+    line-height: 1;
+    color: var(--black);
+  }
+  .tok-name {
+    font-size: clamp(0.65rem, 2vw, 0.78rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--black);
+    opacity: 0.7;
+    margin-top: 0.3rem;
+  }
+
+  /* Distribution bar */
+  .tok-bar-wrap {
+    margin-top: 1.8rem;
+    border: 3px solid var(--black);
+    border-radius: 8px;
+    overflow: hidden;
+    height: 48px;
+    display: flex;
+  }
+  .tok-bar-seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: clamp(0.65rem, 2vw, 0.82rem);
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .tok-bar-seg.liq    { background: var(--yellow); flex: 70; }
+  .tok-bar-seg.team   { background: #FFD6D8; flex: 15; border-left: 3px solid var(--black); }
+  .tok-bar-seg.collab { background: #D6E4FF; flex: 15; border-left: 3px solid var(--black); }
+
+  .tok-legend {
+    display: flex;
+    gap: 1.2rem;
+    margin-top: 0.9rem;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  .legend-dot {
+    width: 13px; height: 13px;
+    border-radius: 3px;
+    border: 2px solid var(--black);
+    flex-shrink: 0;
+  }
+
+  /* Contract box */
+  .contract-box {
+    margin-top: 2rem;
+    background: var(--black);
+    color: var(--yellow);
+    padding: 1rem 1.2rem;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .contract-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    flex-shrink: 0;
+  }
+  .contract-addr {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(0.62rem, 1.8vw, 0.78rem);
+    flex: 1;
+    min-width: 0;
+    word-break: break-all;
+    opacity: 0.9;
+  }
+  .copy-btn {
+    background: var(--yellow);
+    color: var(--black);
+    border: none;
+    padding: 0.4rem 0.9rem;
+    font-weight: 900;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    flex-shrink: 0;
+    transition: transform 0.15s;
+  }
+  .copy-btn:hover { transform: scale(1.05); }
+
+  /* ── ROADMAP ── */
+  .roadmap-section { background: var(--yellow); }
+  .roadmap-steps {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid var(--black);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .rm-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.1rem 1.4rem;
+    border-bottom: 2px solid var(--black);
+    background: var(--white);
+    transition: background 0.15s;
+  }
+  .rm-step:last-child { border-bottom: none; }
+  .rm-step:hover { background: var(--gray); }
+  .rm-num {
+    font-family: 'Bangers', cursive;
+    font-size: 1.8rem;
+    color: var(--yellow);
+    background: var(--black);
+    width: 46px;
+    height: 46px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    letter-spacing: 1px;
+  }
+  .rm-content h3 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(1.1rem, 3.5vw, 1.35rem);
+    letter-spacing: 1px;
+    margin-bottom: 0.2rem;
+  }
+  .rm-content p {
+    font-size: clamp(0.82rem, 2vw, 0.9rem);
+    color: rgba(0,0,0,0.58);
+    line-height: 1.5;
+  }
+
+  /* ── HOW TO BUY ── */
+  .buy-section { background: var(--black); color: var(--yellow); }
+  .buy-section .section-label { color: rgba(255,214,0,0.45); }
+  .buy-section h2 { color: var(--yellow); }
+  .buy-steps {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+  .buy-card {
+    border: 2px solid rgba(255,214,0,0.25);
+    border-radius: 8px;
+    padding: 1.4rem 1.2rem;
+    transition: border-color 0.2s;
+  }
+  .buy-card:hover { border-color: var(--yellow); }
+  .buy-step-num {
+    font-family: 'Bangers', cursive;
+    font-size: 2.5rem;
+    color: var(--yellow);
+    opacity: 0.22;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .buy-card h3 {
+    font-weight: 900;
+    font-size: clamp(0.88rem, 2.5vw, 1rem);
+    color: var(--yellow);
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .buy-card p {
+    font-size: clamp(0.8rem, 2vw, 0.88rem);
+    color: rgba(255,214,0,0.52);
+    line-height: 1.55;
+  }
+  .contract-dashed {
+    margin-top: 2rem;
+    padding: 1.2rem;
+    border: 2px dashed rgba(255,214,0,0.28);
+    border-radius: 8px;
+    font-size: clamp(0.72rem, 2vw, 0.82rem);
+    color: rgba(255,214,0,0.48);
+    line-height: 1.6;
+    word-break: break-all;
+  }
+  .contract-dashed strong { color: rgba(255,214,0,0.78); }
+
+  /* ── COMMUNITY ── */
+  .community-section {
+    background: var(--gray);
+    border-top: 4px solid var(--black);
+    text-align: center;
+  }
+  .community-section p { opacity: 0.55; max-width: 480px; margin: 0.5rem auto 0; }
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 0.9rem;
+    margin-top: 1.8rem;
+    flex-wrap: wrap;
+  }
+  .social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--black);
+    color: var(--yellow);
+    text-decoration: none;
+    padding: 0.7rem 1.4rem;
+    border-radius: 6px;
+    font-weight: 900;
+    font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 3px solid var(--black);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .social-btn:hover { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--black); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    color: rgba(255,214,0,0.32);
+    text-align: center;
+    padding: 2rem 1.5rem;
+    font-size: clamp(0.68rem, 2vw, 0.78rem);
+    letter-spacing: 0.4px;
+    border-top: 2px solid rgba(255,214,0,0.1);
+    word-break: break-all;
+  }
+  footer strong { color: var(--yellow); }
+  footer p + p { margin-top: 0.5rem; }
+
+  /* ═══════════════════════════════════
+     TABLET  (≤ 900px)
+  ═══════════════════════════════════ */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; padding: 2.5rem 1.5rem; }
+    .hero-img { order: -1; margin-bottom: 0.5rem; }
+    .mascot-frame { width: 160px; height: 160px; }
+    .mascot-inner { font-size: 5rem; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .stat-item:nth-child(2) { border-right: none; }
+    .stat-item:nth-child(1),
+    .stat-item:nth-child(2) { border-bottom: 1px solid rgba(255,214,0,0.2); }
+    .buy-steps { grid-template-columns: repeat(2, 1fr); }
+    .tokenomics-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ═══════════════════════════════════
+     PHONE  (≤ 520px)
+  ═══════════════════════════════════ */
+  @media (max-width: 520px) {
+    nav { padding: 0.75rem 1rem; }
+    .nav-cta { padding: 0.5rem 0.85rem; font-size: 0.75rem; }
+    .hero { padding: 2rem 1.2rem; gap: 1.2rem; }
+    .mascot-frame { width: 130px; height: 130px; }
+    .mascot-inner { font-size: 4rem; }
+    .badge-supply { font-size: 0.62rem; padding: 0.35rem 0.6rem; }
+    .badge-supply span { font-size: 0.85rem; }
+    h1 { font-size: clamp(3rem, 16vw, 4.5rem); }
+    .hero-sub { font-size: 0.9rem; }
+    .btn-primary, .btn-secondary { width: 100%; text-align: center; padding: 0.85rem 1rem; font-size: 0.9rem; }
+    .hero-btns { flex-direction: column; }
+
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .stat-value { font-size: 1rem; }
+
+    section { padding: 2.5rem 1.2rem; }
+
+    .tokenomics-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+    .tok-bar-seg { font-size: 0.6rem; }
+    .tok-bar-wrap { height: 40px; }
+    .tok-legend { gap: 0.75rem; }
+    .legend-item { font-size: 0.7rem; }
+
+    .contract-box { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .contract-addr { font-size: 0.62rem; }
+    .copy-btn { width: 100%; text-align: center; padding: 0.55rem; }
+
+    .rm-step { padding: 0.9rem 1rem; gap: 0.75rem; }
+    .rm-num { width: 38px; height: 38px; font-size: 1.4rem; }
+
+    .buy-steps { grid-template-columns: 1fr; }
+
+    .social-links { gap: 0.6rem; }
+    .social-btn { padding: 0.6rem 1rem; font-size: 0.78rem; }
+
+    footer { padding: 1.5rem 1rem; font-size: 0.66rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">$MEMETARD</div>
+  <ul class="nav-links">
+    <li><a href="#tokenomics">Tokenomics</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#buy">How to Buy</a></li>
+    <li><a href="#community">Community</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('buy').scrollIntoView({behavior:'smooth'})">Buy Now 🚀</button>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <span class="ticker-inner">
+    🚀 $MEMETARD &nbsp;•&nbsp; 1,000,000,000 SUPPLY &nbsp;•&nbsp; ❤️ COMMUNITY &nbsp;•&nbsp; 💙 COLLABORATION &nbsp;•&nbsp; TO THE MOON &nbsp;•&nbsp; 🤪 NO BRAINS REQUIRED &nbsp;•&nbsp; $MEMETARD &nbsp;•&nbsp; 1,000,000,000 SUPPLY &nbsp;•&nbsp; ❤️ COMMUNITY &nbsp;•&nbsp; 💙 COLLABORATION &nbsp;•&nbsp; TO THE MOON &nbsp;•&nbsp; 🤪 NO BRAINS REQUIRED &nbsp;•&nbsp;
+  </span>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-text">
+    <div class="hero-eyebrow">The coin you never knew you needed</div>
+    <h1>$MEME<br>TARD</h1>
+    <p class="hero-sub">The world's most unhinged community coin. No promises. Just vibes, memes, and degeneracy — the way crypto was meant to be.</p>
+    <div class="hero-btns">
+      <a href="#buy" class="btn-primary">Buy $MEMETARD</a>
+      <a href="#roadmap" class="btn-secondary">View Roadmap</a>
+    </div>
+  </div>
+  <div class="hero-img">
+    <div class="mascot-frame">
+      <div class="mascot-inner">🤪</div>
+      <div class="badge-supply"><span>1B</span>TOTAL SUPPLY</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-label">Total Supply</div>
+    <div class="stat-value">1,000,000,000</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-label">Token</div>
+    <div class="stat-value">$MEMETARD</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-label">Network</div>
+    <div class="stat-value">Solana</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-label">Status</div>
+    <div class="stat-value">LIVE 🔥</div>
+  </div>
+</div>
+
+<!-- TOKENOMICS -->
+<section class="tokenomics-section" id="tokenomics">
+  <div class="section-label">Token Distribution</div>
+  <h2>Tokenomics</h2>
+  <p style="opacity:0.6; max-width:520px; font-size:clamp(0.85rem,2.5vw,1rem);">1,000,000,000 $MEMETARD tokens. Built for the community, powered by collaboration, liquidity locked and loaded.</p>
+
+  <div class="tok-bar-wrap">
+    <div class="tok-bar-seg liq">💛 70% Liquidity</div>
+    <div class="tok-bar-seg team">❤️ 15%</div>
+    <div class="tok-bar-seg collab">💙 15%</div>
+  </div>
+  <div class="tok-legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--yellow);"></div>70% — Liquidity</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#FFD6D8;"></div>15% — Team & Community Dev ❤️</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#D6E4FF;"></div>15% — Collaboration 💙</div>
+  </div>
+
+  <div class="tokenomics-grid">
+    <div class="tok-card yellow">
+      <div class="tok-pct">70%</div>
+      <div class="tok-name">💛 Liquidity</div>
+    </div>
+    <div class="tok-card red">
+      <div class="tok-pct">15%</div>
+      <div class="tok-name">❤️ Team & Community Dev</div>
+    </div>
+    <div class="tok-card blue">
+      <div class="tok-pct">15%</div>
+      <div class="tok-name">💙 Collaboration</div>
+    </div>
+  </div>
+
+  <div class="contract-box">
+    <div class="contract-label">CA</div>
+    <div class="contract-addr">7DSVkAUjHgdoCG7gFArbpnQUK56nCAus8XA2u6o8nFdb</div>
+    <button class="copy-btn" onclick="navigator.clipboard.writeText('7DSVkAUjHgdoCG7gFArbpnQUK56nCAus8XA2u6o8nFdb').then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)})">Copy</button>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="roadmap-section" id="roadmap">
+  <div class="section-label">Phase by Phase</div>
+  <h2>The Roadmap</h2>
+  <div class="roadmap-steps">
+    <div class="rm-step"><div class="rm-num">1</div><div class="rm-content"><h3>Minting &amp; Holder Allocation</h3><p>Token supply goes live. Community, liquidity, and collaboration wallets locked and loaded.</p></div></div>
+    <div class="rm-step"><div class="rm-num">2</div><div class="rm-content"><h3>DEX Listing</h3><p>Trading pair live on decentralized exchanges. Initial liquidity added. The market opens — let the chaos begin.</p></div></div>
+    <div class="rm-step"><div class="rm-num">3</div><div class="rm-content"><h3>CEX Listing</h3><p>Hitting centralized exchanges as the project grows. More access, more exposure, more tards in the family.</p></div></div>
+    <div class="rm-step"><div class="rm-num">4</div><div class="rm-content"><h3>Community Growth &amp; Content</h3><p>Non-stop publishing — project updates, tokenomics breakdowns, crypto insights, memes. Always building.</p></div></div>
+    <div class="rm-step"><div class="rm-num">5</div><div class="rm-content"><h3>Collaborative Insights</h3><p>Holders, builders, analysts, creators — we build WITH the community, not just FOR it.</p></div></div>
+    <div class="rm-step"><div class="rm-num">6</div><div class="rm-content"><h3>Distribution Transparency</h3><p>Bubble map analysis, wallet tracking, holder distribution reports. Full transparency, no games.</p></div></div>
+    <div class="rm-step"><div class="rm-num">7</div><div class="rm-content"><h3>Holder Rewards &amp; Staking</h3><p>Staking rewards, holder incentives, special campaigns. Diamond hands win.</p></div></div>
+    <div class="rm-step"><div class="rm-num">8</div><div class="rm-content"><h3>Liquidity Pool</h3><p>Stable, transparent liquidity management. Liquidity lock details published for the whole community.</p></div></div>
+    <div class="rm-step"><div class="rm-num">9</div><div class="rm-content"><h3>RTM &amp; ElChef Marketing</h3><p>X campaigns, influencer collabs, AMAs, ambassador program, competitions. Noise gets made.</p></div></div>
+    <div class="rm-step"><div class="rm-num">10</div><div class="rm-content"><h3>Staking &amp; Vesting</h3><p>Long-term holders lock a percentage into defined vesting periods. Commitment gets rewarded.</p></div></div>
+  </div>
+</section>
+
+<!-- HOW TO BUY -->
+<section class="buy-section" id="buy">
+  <div class="section-label">Getting In</div>
+  <h2>How to Buy</h2>
+  <div class="buy-steps">
+    <div class="buy-card"><div class="buy-step-num">01</div><h3>Get a Wallet</h3><p>Download Phantom or Solflare. Create your wallet and secure your seed phrase — don't lose it.</p></div>
+    <div class="buy-card"><div class="buy-step-num">02</div><h3>Buy SOL</h3><p>Purchase SOL from any exchange (Binance, Coinbase, Kraken). Send it to your wallet address.</p></div>
+    <div class="buy-card"><div class="buy-step-num">03</div><h3>Swap on DEX</h3><p>Head to Raydium or Jupiter. Paste the $MEMETARD contract address and swap your SOL.</p></div>
+    <div class="buy-card"><div class="buy-step-num">04</div><h3>Hold &amp; Enjoy</h3><p>You're in the family now. Join the community, share the memes, and let's go to the moon. 🚀</p></div>
+  </div>
+  <div class="contract-dashed">
+    <strong>Contract:</strong> 7DSVkAUjHgdoCG7gFArbpnQUK56nCAus8XA2u6o8nFdb
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="community-section" id="community">
+  <div class="section-label">Join the Movement</div>
+  <h2>Community</h2>
+  <p>The tards are assembling. ❤️ Community. 💙 Collaboration. Never sell.</p>
+  <div class="social-links">
+    <a href="#" class="social-btn">𝕏 Twitter</a>
+    <a href="#" class="social-btn">💬 Telegram</a>
+    <a href="#" class="social-btn">📊 Chart</a>
+    <a href="#" class="social-btn">🔍 Explorer</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>$MEMETARD</strong> &nbsp;•&nbsp; 7DSVkAUjHgdoCG7gFArbpnQUK56nCAus8XA2u6o8nFdb &nbsp;•&nbsp; 1,000,000,000 Supply</p>
+  <p>❤️ Team &amp; Community Dev &nbsp;•&nbsp; 💙 Collaboration &nbsp;•&nbsp; 💛 Liquidity</p>
+  <p>$MEMETARD is a meme coin for entertainment purposes. Not financial advice. Always DYOR. 🤙</p>
+</footer>
+
+</body>
+</html>
